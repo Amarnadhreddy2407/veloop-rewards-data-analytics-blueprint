@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VELOOP Rewards — Task 01 Analytics Blueprint</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+    .table-scroll::-webkit-scrollbar {
+      height: 8px;
+      width: 8px;
+    }
+    .table-scroll::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 9999px;
+    }
+    .table-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    .table-scroll::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+
+  <!-- Mandatory Data Authenticity & Blueprint Notice Banner -->
+  <div role="region" aria-label="Data Authenticity Policy Notice" class="bg-amber-950 text-amber-50 border-b border-amber-800/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs sm:text-sm">
+      <div class="flex items-start sm:items-center gap-2.5">
+        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-amber-400/20 text-amber-200 border border-amber-400/40 shrink-0">
+          Proposed / Simulated Blueprint
+        </span>
+        <p class="leading-snug text-amber-100">
+          <strong>VELOOP Rewards is under development.</strong> All schemas, events, lifecycles, and examples shown here are <strong>PROPOSED / SIMULATED FOR ANALYTICAL BLUEPRINTING</strong>—never real VELOOP performance metrics, active users, or live company statistics.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Application Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+        <div>
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-xl bg-indigo-600 text-white font-bold text-sm shadow-xs">
+              V
+            </span>
+            <h1 class="text-lg sm:text-xl font-extrabold tracking-tight text-slate-900">
+              VELOOP Rewards — Data Analyst Internship (Task 01)
+            </h1>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+              Work Packages A–H in Sheet
+            </span>
+          </div>
+          <p class="mt-1 text-xs sm:text-sm text-slate-600">
+            Product Analytics Readiness, Event Boundaries, Lifecycle Specifications &amp; Spreadsheet Blueprint Companion
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2 text-xs">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200 font-medium">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            Completed in Sheet: WPs A–H (10 Tabs)
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 border border-slate-200 font-medium">
+            <span class="w-2 h-2 rounded-full bg-slate-400"></span>
+            Next Phases: WPs I–S &amp; Deliverables (01–21)
+          </span>
+        </div>
+      </div>
+
+      <nav aria-label="Blueprint Sections" class="mt-4 -mb-px flex items-center gap-1.5 overflow-x-auto table-scroll pb-2 lg:pb-0">
+        <button type="button" data-tab="overview" class="nav-tab whitespace-nowrap px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer">
+          Overview &amp; Steps
+        </button>
+        <button type="button" data-tab="a1" class="nav-tab whitespace-nowrap px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer">
+          A1 Product Mapping
+        </button>
+        <button type="button" data-tab="a2a3" class="nav-tab whitespace-nowrap px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer">
+          A2 &amp; A3 Events
+        </button>
+        <button type="button" data-tab="a4" class="nav-tab whitespace-nowrap px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer">
+          A4 Coverage &amp; Gaps
+        </button>
+        <button type="button" data-tab="wpb" class="nav-tab whitespace-nowrap px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer">
+          WP B User Analytics
+        </button>
+        <button type="button" data-tab="wpc" class="nav-tab whitespace-nowrap px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer">
+          WP C Earning &amp; Rewards
+        </button>
+        <button type="button" data-tab="wpd" class="nav-tab whitespace-nowrap px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer">
+          WP D Wallet &amp; Withdrawals
+        </button>
+        <button type="button" data-tab="wpe" class="nav-tab whitespace-nowrap px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer">
+          WP E Referral &amp; Engagement
+        </button>
+        <button type="button" data-tab="roadmap" class="nav-tab whitespace-nowrap px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer">
+          WPs A–S &amp; Deliverables (01–21)
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+    <div id="app-feedback" class="hidden mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-sm"></div>
+
+    <!-- TAB 1: OVERVIEW -->
+    <section id="panel-overview" class="tab-panel space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-7 shadow-xs">
+        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+          <div class="space-y-2 max-w-3xl">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+              Task 01 Review Summary
+            </span>
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-900">
+              Building VELOOP’s Analytical Foundation Before High-Volume Production Data
+            </h2>
+            <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+              VELOOP Rewards is an online rewards and engagement platform under development (spanning accounts, tasks/missions, daily rewards, streaks, spins, referrals, wallet transactions, and withdrawals). Because the working dataset is simulated and VELOOP is still evolving, this project establishes clear event boundaries, lifecycle schemas, a 30-event tracking plan, a 78-field data dictionary, and a logical data model—without fabricating live company metrics or converting unverified assumptions into facts.
+            </p>
+          </div>
+          <div class="bg-slate-50 rounded-2xl border border-slate-200 p-4 min-w-[250px] space-y-2">
+            <div class="text-xs font-bold uppercase tracking-wider text-slate-500">Spreadsheet Tabs Mapped (WPs A–H)</div>
+            <ul class="text-xs text-slate-700 space-y-1 font-medium">
+              <li>1. <code class="text-indigo-700">A1_Product_Area_Mapping</code></li>
+              <li>2. <code class="text-indigo-700">A2_A3_Event_Distinctions</code></li>
+              <li>3. <code class="text-indigo-700">A4_Coverage_And_Gaps</code></li>
+              <li>4. <code class="text-indigo-700">WP_B_User_Analytics</code></li>
+              <li>5. <code class="text-indigo-700">WP_C_Earning_Rewards</code></li>
+              <li>6. <code class="text-indigo-700">WP_D_Wallet_Withdrawals</code></li>
+              <li>7. <code class="text-indigo-700">WP_E_Referral_Engagement</code></li>
+              <li>8. <code class="text-indigo-700">WP_F_Event_Tracking_Plan</code></li>
+              <li>9. <code class="text-indigo-700">WP_G_Data_Dictionary</code></li>
+              <li>10. <code class="text-indigo-700">WP_H_Logical_Data_Model</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+          <div class="rounded-2xl bg-emerald-50/70 border border-emerald-200/80 p-4">
+            <div class="text-2xl sm:text-3xl font-extrabold text-emerald-700">WPs A–H</div>
+            <div class="text-xs sm:text-sm font-semibold text-emerald-900 mt-0.5">Completed in Sheet</div>
+            <div class="text-[11px] text-emerald-700 mt-1">10 tabs including tracking, dictionary &amp; model</div>
+          </div>
+          <div class="rounded-2xl bg-indigo-50/70 border border-indigo-200/80 p-4">
+            <div class="text-2xl sm:text-3xl font-extrabold text-indigo-700">30 / 78</div>
+            <div class="text-xs sm:text-sm font-semibold text-indigo-900 mt-0.5">Events &amp; Dictionary Fields</div>
+            <div class="text-[11px] text-indigo-700 mt-1">Defined in WPs F &amp; G across 8 entities</div>
+          </div>
+          <div class="rounded-2xl bg-amber-50/80 border border-amber-200/80 p-4">
+            <div class="text-2xl sm:text-3xl font-extrabold text-amber-800">Proposed</div>
+            <div class="text-xs sm:text-sm font-semibold text-amber-950 mt-0.5">Evidence Status</div>
+            <div class="text-[11px] text-amber-800 mt-1">No unverified claims stated as fact</div>
+          </div>
+          <div class="rounded-2xl bg-slate-100 border border-slate-200 p-4">
+            <div class="text-2xl sm:text-3xl font-extrabold text-slate-800">WPs I–S</div>
+            <div class="text-xs sm:text-sm font-semibold text-slate-900 mt-0.5">Next Project Phases</div>
+            <div class="text-[11px] text-slate-600 mt-1">KPIs, Profiling, Quality Audit &amp; Blueprints</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-base sm:text-lg font-bold text-slate-900">
+              Completed in Spreadsheet (WPs A–H)
+            </h3>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
+              In Spreadsheet
+            </span>
+          </div>
+          <div class="space-y-3 text-sm">
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
+              <div class="font-semibold text-slate-900">Work Package A (A1–A4)</div>
+              <p class="text-xs sm:text-sm text-slate-600 mt-1">
+                Mapped product areas and features, separated User Events from System Events and Business Outcomes, and built the Data Coverage Matrix with 11 analytics gaps.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
+              <div class="font-semibold text-slate-900">Work Packages B–E</div>
+              <p class="text-xs sm:text-sm text-slate-600 mt-1">
+                Defined core IDs and user/account fields, 5-stage earning and reward states, 9-field wallet ledger and 8-field withdrawal lifecycle with 8 KPIs, and the 4-stage referral funnel plus engagement framework.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
+              <div class="font-semibold text-slate-900">Work Packages F–H</div>
+              <p class="text-xs sm:text-sm text-slate-600 mt-1">
+                Added a 30-event tracking plan, a 78-field data dictionary across 8 entities, and a logical data model with keys, cardinalities, and ER blueprint.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-base sm:text-lg font-bold text-slate-900">
+              Remaining Task 01 Work Packages (WPs I–S)
+            </h3>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-900">
+              Upcoming Phases
+            </span>
+          </div>
+          <div class="space-y-3 text-sm">
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
+              <div class="font-semibold text-slate-900">WPs I, J &amp; K</div>
+              <p class="text-xs sm:text-sm text-slate-600 mt-1">
+                30+ KPI Catalogue (formulas and limitations, no arbitrary targets), Simulated Data Profiling across sheets, and Data Quality Audit on <code class="text-xs">Messy_Data</code>.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
+              <div class="font-semibold text-slate-900">WPs L–S &amp; Deliverables 01–21</div>
+              <p class="text-xs sm:text-sm text-slate-600 mt-1">
+                Data quality control framework, 7-view dashboard blueprint, developer analytics handoff, practical pipeline, governance &amp; change log, readiness scorecard, assumption register, prioritized backlog, and final report.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: A1 -->
+    <section id="panel-a1" class="tab-panel hidden space-y-5">
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+          <div>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+              Work Package A • A1
+            </span>
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900 mt-1">Product Area Mapping</h2>
+            <p class="text-xs sm:text-sm text-slate-600">
+              Maps VELOOP product areas and features to user actions, system outcomes, required data, and business questions.
+            </p>
+          </div>
+          <div class="text-xs text-slate-500 font-medium" id="a1-count-label">Showing 6 of 6 rows</div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+          <div>
+            <label for="a1-search" class="block text-xs font-semibold text-slate-700 mb-1">Search Keywords</label>
+            <input id="a1-search" type="text" placeholder="Search feature, action, data, question..." class="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition" />
+          </div>
+          <div>
+            <label for="a1-area-filter" class="block text-xs font-semibold text-slate-700 mb-1">Filter by Product Area</label>
+            <select id="a1-area-filter" class="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition">
+              <option value="ALL">All Product Areas</option>
+              <option value="Account & Onboarding">Account &amp; Onboarding</option>
+              <option value="Earning Activities">Earning Activities</option>
+              <option value="Engagement Mechanics">Engagement Mechanics</option>
+              <option value="Referrals">Referrals</option>
+              <option value="Wallet & Payouts">Wallet &amp; Payouts</option>
+              <option value="Support & Help">Support &amp; Help</option>
+            </select>
+          </div>
+          <div>
+            <label for="a1-status-filter" class="block text-xs font-semibold text-slate-700 mb-1">Filter by Status</label>
+            <select id="a1-status-filter" class="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition">
+              <option value="ALL">All Statuses</option>
+              <option value="Proposed">Proposed</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto table-scroll rounded-xl border border-slate-200">
+          <table class="min-w-full divide-y divide-slate-200 text-left text-xs sm:text-sm">
+            <thead class="bg-slate-50 text-slate-700 font-semibold">
+              <tr>
+                <th class="px-4 py-3 whitespace-nowrap">Product Area</th>
+                <th class="px-4 py-3 whitespace-nowrap">Feature</th>
+                <th class="px-4 py-3">User Action</th>
+                <th class="px-4 py-3">System Outcome</th>
+                <th class="px-4 py-3">Data Required</th>
+                <th class="px-4 py-3">Business Question</th>
+                <th class="px-4 py-3 whitespace-nowrap">Status</th>
+              </tr>
+            </thead>
+            <tbody id="a1-table-body" class="divide-y divide-slate-200 bg-white"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: A2 & A3 -->
+    <section id="panel-a2a3" class="tab-panel hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs">
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+          Work Package A • A2 &amp; A3
+        </span>
+        <h2 class="text-lg sm:text-xl font-bold text-slate-900 mt-1">
+          Distinguishing User Events, System Events &amp; Business Outcomes
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 mt-1">
+          Separating user intent from backend validation and realized business outcomes prevents inflated completion or payout metrics.
+        </p>
+        <div id="a2a3-cards" class="mt-5 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5"></div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs">
+        <h3 class="text-base font-bold text-slate-900">Example Task Progression Flow (A2 &amp; A3)</h3>
+        <div class="mt-4 flex flex-wrap items-center gap-2 text-xs sm:text-sm font-medium">
+          <span class="px-3 py-1.5 rounded-xl bg-blue-50 text-blue-800 border border-blue-200">1. Task Viewed (User)</span>
+          <span class="text-slate-400 font-bold">&rarr;</span>
+          <span class="px-3 py-1.5 rounded-xl bg-blue-50 text-blue-800 border border-blue-200">2. Task Opened (User)</span>
+          <span class="text-slate-400 font-bold">&rarr;</span>
+          <span class="px-3 py-1.5 rounded-xl bg-blue-50 text-blue-800 border border-blue-200">3. Task Started (User)</span>
+          <span class="text-slate-400 font-bold">&rarr;</span>
+          <span class="px-3 py-1.5 rounded-xl bg-blue-50 text-blue-800 border border-blue-200">4. Task Completed (User)</span>
+          <span class="text-slate-400 font-bold">&rarr;</span>
+          <span class="px-3 py-1.5 rounded-xl bg-violet-50 text-violet-800 border border-violet-200">5. Completion Validated (System)</span>
+          <span class="text-slate-400 font-bold">&rarr;</span>
+          <span class="px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200">6. Reward Credited (Outcome)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: A4 -->
+    <section id="panel-a4" class="tab-panel hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+          <div>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+              Work Package A • A4
+            </span>
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900 mt-1">Data Coverage Matrix</h2>
+          </div>
+          <div>
+            <label for="a4-priority-filter" class="sr-only">Filter by Priority</label>
+            <select id="a4-priority-filter" class="rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs sm:text-sm font-medium text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none">
+              <option value="ALL">All Priorities</option>
+              <option value="Critical">Critical</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto table-scroll rounded-xl border border-slate-200">
+          <table class="min-w-full divide-y divide-slate-200 text-left text-xs sm:text-sm">
+            <thead class="bg-slate-50 text-slate-700 font-semibold">
+              <tr>
+                <th class="px-4 py-3 whitespace-nowrap">Product Area</th>
+                <th class="px-4 py-3">User Action</th>
+                <th class="px-4 py-3">System Action</th>
+                <th class="px-4 py-3">Business Outcome</th>
+                <th class="px-4 py-3">Data Required</th>
+                <th class="px-4 py-3">Proposed Event</th>
+                <th class="px-4 py-3 whitespace-nowrap">Source</th>
+                <th class="px-4 py-3">Business Question</th>
+                <th class="px-4 py-3 whitespace-nowrap">Status</th>
+                <th class="px-4 py-3 whitespace-nowrap">Priority</th>
+              </tr>
+            </thead>
+            <tbody id="a4-table-body" class="divide-y divide-slate-200 bg-white"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
+        <h3 class="text-base sm:text-lg font-bold text-slate-900">11 Key Analytics Gaps Identified (GAP-01 to GAP-11)</h3>
+        <div id="a4-gaps-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
+      </div>
+    </section>
+
+    <!-- TAB 5: WP B -->
+    <section id="panel-wpb" class="tab-panel hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+          Work Package B • B1 &amp; B2
+        </span>
+        <h2 class="text-lg sm:text-xl font-bold text-slate-900 mt-1">User Identity Requirements (B1)</h2>
+        <div id="wpb-ids-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
+        <h3 class="text-base sm:text-lg font-bold text-slate-900">User Analytics Specification (10 Fields — B2)</h3>
+        <div class="overflow-x-auto table-scroll rounded-xl border border-slate-200">
+          <table class="min-w-full divide-y divide-slate-200 text-left text-xs sm:text-sm">
+            <thead class="bg-slate-50 text-slate-700 font-semibold">
+              <tr>
+                <th class="px-4 py-3 whitespace-nowrap">Field</th>
+                <th class="px-4 py-3 whitespace-nowrap">Type</th>
+                <th class="px-4 py-3 whitespace-nowrap">Required?</th>
+                <th class="px-4 py-3">Purpose</th>
+                <th class="px-4 py-3 whitespace-nowrap">Source</th>
+                <th class="px-4 py-3 whitespace-nowrap">Validation Status</th>
+              </tr>
+            </thead>
+            <tbody id="wpb-table-body" class="divide-y divide-slate-200 bg-white"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: WP C -->
+    <section id="panel-wpc" class="tab-panel hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+          Work Package C • C1–C4
+        </span>
+        <h2 class="text-lg sm:text-xl font-bold text-slate-900 mt-1">5-Stage Earning Lifecycle</h2>
+        <div id="wpc-lifecycle-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3"></div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-3">
+          <h3 class="text-base sm:text-lg font-bold text-slate-900">Task-Level Analytics Fields (C1)</h3>
+          <div id="wpc-task-fields" class="flex flex-wrap gap-2 pt-1"></div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-3">
+          <h3 class="text-base sm:text-lg font-bold text-slate-900">Reward Settlement States (C3)</h3>
+          <div id="wpc-reward-states" class="space-y-2 pt-1"></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-3">
+          <div class="flex items-center justify-between gap-2">
+            <h3 class="text-base sm:text-lg font-bold text-slate-900">Failed Activity Classification (C2)</h3>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-900">
+              Proposed
+            </span>
+          </div>
+          <div id="wpc-failure-classes" class="space-y-2.5"></div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-3">
+          <h3 class="text-base sm:text-lg font-bold text-slate-900">Third-Party Dependencies (C4)</h3>
+          <p class="text-xs sm:text-sm text-slate-600">
+            External ads, surveys, offers, and partner trackers can cause postback delays, attribution drops, or reversals. Model pending, credited, reversed, and corrected states explicitly.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 7: WP D -->
+    <section id="panel-wpd" class="tab-panel hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+            Work Package D • D1
+          </span>
+          <h2 class="text-base sm:text-lg font-bold text-slate-900">9-Field Wallet Transaction Model</h2>
+          <div class="overflow-x-auto table-scroll rounded-xl border border-slate-200">
+            <table class="min-w-full divide-y divide-slate-200 text-left text-xs">
+              <thead class="bg-slate-50 text-slate-700 font-semibold">
+                <tr>
+                  <th class="px-3 py-2">Field</th>
+                  <th class="px-3 py-2">Role / Notes</th>
+                </tr>
+              </thead>
+              <tbody id="wpd-wallet-body" class="divide-y divide-slate-200 bg-white"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+            Work Package D • D2
+          </span>
+          <h2 class="text-base sm:text-lg font-bold text-slate-900">8-Field Withdrawal Lifecycle Model</h2>
+          <div class="overflow-x-auto table-scroll rounded-xl border border-slate-200">
+            <table class="min-w-full divide-y divide-slate-200 text-left text-xs">
+              <thead class="bg-slate-50 text-slate-700 font-semibold">
+                <tr>
+                  <th class="px-3 py-2">Field</th>
+                  <th class="px-3 py-2">Role / Notes</th>
+                </tr>
+              </thead>
+              <tbody id="wpd-withdrawal-body" class="divide-y divide-slate-200 bg-white"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+          Work Package D • D3
+        </span>
+        <h3 class="text-base sm:text-lg font-bold text-slate-900 mt-1">8 Core Withdrawal KPIs</h3>
+        <div class="overflow-x-auto table-scroll rounded-xl border border-slate-200">
+          <table class="min-w-full divide-y divide-slate-200 text-left text-xs sm:text-sm">
+            <thead class="bg-slate-50 text-slate-700 font-semibold">
+              <tr>
+                <th class="px-4 py-3 whitespace-nowrap">KPI Name</th>
+                <th class="px-4 py-3">Definition</th>
+                <th class="px-4 py-3">Formula</th>
+                <th class="px-4 py-3 whitespace-nowrap">Source</th>
+                <th class="px-4 py-3 whitespace-nowrap">Stakeholder</th>
+                <th class="px-4 py-3">Limitation</th>
+              </tr>
+            </thead>
+            <tbody id="wpd-kpis-body" class="divide-y divide-slate-200 bg-white"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 8: WP E -->
+    <section id="panel-wpe" class="tab-panel hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+          Work Package E • E1
+        </span>
+        <h2 class="text-lg sm:text-xl font-bold text-slate-900 mt-1">4-Stage Referral Funnel</h2>
+        <div id="wpe-funnel-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5"></div>
+        <div class="pt-2">
+          <h3 class="text-sm font-bold text-slate-800 mb-2">Core Referral Data Fields</h3>
+          <div id="wpe-referral-fields" class="flex flex-wrap gap-2"></div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+          Work Package E • E2
+        </span>
+        <h3 class="text-base sm:text-lg font-bold text-slate-900 mt-1">Engagement Measurement Framework</h3>
+        <div id="wpe-engagement-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+      </div>
+    </section>
+
+    <!-- TAB 9: ROADMAP -->
+    <section id="panel-roadmap" class="tab-panel hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+          <div>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+              22–25 Day Project Schedule • Work Packages A–S
+            </span>
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900 mt-1">
+              Complete Work Package Roadmap (A through S + Implementation Backlog)
+            </h2>
+          </div>
+          <div class="text-xs text-slate-500 font-medium" id="wp-count-label">Showing all work packages</div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label for="wp-search" class="block text-xs font-semibold text-slate-700 mb-1">Search Work Packages</label>
+            <input id="wp-search" type="text" placeholder="Search work package, day, topic..." class="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition" />
+          </div>
+          <div>
+            <label for="wp-phase-filter" class="block text-xs font-semibold text-slate-700 mb-1">Filter by Sheet / Blueprint Status</label>
+            <select id="wp-phase-filter" class="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition">
+              <option value="ALL">All Work Packages</option>
+              <option value="In Sheet">Completed in Sheet (WPs A–H)</option>
+              <option value="Upcoming">Upcoming Blueprint (WPs I–S &amp; Backlog)</option>
+            </select>
+          </div>
+          <div>
+            <label for="wp-evidence-filter" class="block text-xs font-semibold text-slate-700 mb-1">Filter by Evidence Tag</label>
+            <select id="wp-evidence-filter" class="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition">
+              <option value="ALL">All Evidence Tags</option>
+              <option value="Proposed">Proposed</option>
+              <option value="To Be Verified">To Be Verified</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="wp-roadmap-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-1"></div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+              Final Submission Checklist • 21 Deliverables
+            </span>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mt-1">
+              Required Final Deliverables (01 – 21)
+            </h3>
+          </div>
+          <div class="w-full sm:w-64">
+            <label for="deliv-search" class="sr-only">Search Deliverables</label>
+            <input id="deliv-search" type="text" placeholder="Search deliverable 01–21..." class="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition" />
+          </div>
+        </div>
+
+        <div class="overflow-x-auto table-scroll rounded-xl border border-slate-200">
+          <table class="min-w-full divide-y divide-slate-200 text-left text-xs sm:text-sm">
+            <thead class="bg-slate-50 text-slate-700 font-semibold">
+              <tr>
+                <th class="px-4 py-3 whitespace-nowrap">#</th>
+                <th class="px-4 py-3 whitespace-nowrap">Deliverable</th>
+                <th class="px-4 py-3">Format &amp; Scope</th>
+                <th class="px-4 py-3 whitespace-nowrap">Related WP</th>
+                <th class="px-4 py-3 whitespace-nowrap">Current Status</th>
+              </tr>
+            </thead>
+            <tbody id="deliv-table-body" class="divide-y divide-slate-200 bg-white"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500">
+      <p>VELOOP Rewards Data Analyst Internship — Task 01 Blueprint Companion (Proposed &amp; Simulated for Analytical Design).</p>
+      <p>Aligned with Spreadsheet Tabs WPs A–H, Work Packages A–S &amp; Deliverables 01–21.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const A1_DATA = [
+        { area: 'Account & Onboarding', feature: 'Registration & Login', userAction: 'Submits sign-up/login details; completes onboarding steps', systemOutcome: 'Account created; session started; onboarding state updated', dataRequired: 'user_id, session_id, timestamps, auth/acquisition source, device/platform', question: 'How many users register, complete onboarding, and return over time?', status: 'Proposed' },
+        { area: 'Earning Activities', feature: 'Tasks & Missions', userAction: 'Views, opens, starts, or completes a task/mission', systemOutcome: 'Task validated; reward credited, pending, failed, or reversed', dataRequired: 'user_id, task_id, task_type, start/end timestamps, status, reward amount & unit', question: 'Which tasks have high start-to-completion and validation rates?', status: 'Proposed' },
+        { area: 'Engagement Mechanics', feature: 'Daily Rewards, Streaks, Spins, Badges & Levels', userAction: 'Claims daily reward, triggers spin, progresses streaks/levels', systemOutcome: 'Streak/level updated; spin outcome resolved; badge or reward issued', dataRequired: 'user_id, event_id, feature type, streak count, outcome value, timestamp', question: 'Which engagement loops drive repeat daily usage and retention?', status: 'Proposed' },
+        { area: 'Referrals', feature: 'Referral Invites & Sign-ups', userAction: 'Shares referral code/link; referred friend signs up and activates', systemOutcome: 'Referral tracked; referred user registered/activated; referral converted', dataRequired: 'referral_id, referring_user_id, referred_user_id, stage timestamps, status', question: 'Where do referrals drop off between invite, sign-up, activation, and conversion?', status: 'Proposed' },
+        { area: 'Wallet & Payouts', feature: 'Wallet Balance & Withdrawals', userAction: 'Views wallet; requests a withdrawal using a payout method', systemOutcome: 'Ledger entry posted; withdrawal moved to processing, completed, rejected, or reversed', dataRequired: 'transaction_id, withdrawal_id, user_id, amount, unit, status, timestamps, reason', question: 'How much value is credited vs. withdrawn, and how fast are withdrawals processed?', status: 'Proposed' },
+        { area: 'Support & Help', feature: 'Help Center & Support', userAction: 'Searches/reads help content or submits a support request', systemOutcome: 'Ticket/request logged; issue category recorded; status updated', dataRequired: 'user_id (where applicable), topic/category, timestamps, status', question: 'What issues drive support volume, and does help content reduce tickets?', status: 'Proposed' }
+      ];
+
+      const A2_A3_DATA = [
+        { badge: 'Layer 1 • Intent', badgeClass: 'bg-blue-50 text-blue-800 border-blue-200', title: 'User Event', definition: 'Direct interaction or action initiated by the user inside the application interface or earning flow.', examples: ['Viewing or opening a task card', 'Starting a task, spin, or mission', 'Claiming a daily reward or sharing a referral', 'Submitting a withdrawal request'] },
+        { badge: 'Layer 2 • Processing', badgeClass: 'bg-violet-50 text-violet-800 border-violet-200', title: 'System Event', definition: 'Technical, backend, or partner-side processing action that validates activity, handles errors, or updates ledger/workflow state.', examples: ['Task completion validated or flagged as failed', 'External ad/offer postback received or delayed', 'Ledger transaction written to wallet', 'Withdrawal moved into under-review / processing'] },
+        { badge: 'Layer 3 • Impact', badgeClass: 'bg-emerald-50 text-emerald-800 border-emerald-200', title: 'Business Outcome', definition: 'Measurable product or economic result reflecting realized user value, conversion, or settlement.', examples: ['Reward credited, pending, or reversed', 'Referred user activated and referral converted', 'Withdrawal completed, rejected, or reversed', 'Account status changed or milestone achieved'] }
+      ];
+
+      const A4_MATRIX_DATA = [
+        { area: 'Registration', userAction: 'Submits registration form', systemAction: 'Creates user account & assigns ID', outcome: 'New registered user', dataRequired: 'user_id, registration_ts, acq_source, platform', event: 'user_registered', source: 'Frontend / Backend', question: 'How many new users join and via which channels?', status: 'Proposed', priority: 'Critical' },
+        { area: 'Tasks', userAction: 'Starts a task', systemAction: 'Records task start & checks eligibility', outcome: 'Task attempt initiated', dataRequired: 'user_id, task_id, task_type, start_ts, session_id', event: 'task_started', source: 'Frontend / Backend', question: 'Which tasks attract starts and what is start-to-completion flow?', status: 'Proposed', priority: 'High' },
+        { area: 'Tasks', userAction: 'Finishes required task steps', systemAction: 'Runs completion & validation checks', outcome: 'Validated completion or failed attempt', dataRequired: 'user_id, task_id, completion_ts, status, failure_reason', event: 'task_completed / task_failed', source: 'Backend / Partner Webhook', question: 'What share of started tasks complete and pass validation?', status: 'Proposed', priority: 'Critical' },
+        { area: 'Rewards', userAction: 'None (post-task/activity)', systemAction: 'Evaluates & posts reward state (pending/credited/reversed)', outcome: 'Reward earned/settled or reversed', dataRequired: 'user_id, reward_id, task_id, amount, unit, status, ts', event: 'reward_credited / reward_pending / reward_reversed', source: 'Backend Ledger', question: 'How much reward value is issued vs. pending or reversed?', status: 'Proposed', priority: 'Critical' },
+        { area: 'Wallet', userAction: 'Opens wallet / views balance', systemAction: 'Writes ledger transaction & updates balance', outcome: 'Auditable wallet balance change', dataRequired: 'transaction_id, user_id, txn_type, amount, unit, ref_id, ts', event: 'wallet_transaction_created / completed / reversed', source: 'Backend Ledger', question: 'Can every balance change be reconciled to a unique transaction?', status: 'Proposed', priority: 'Critical' },
+        { area: 'Withdrawals', userAction: 'Submits withdrawal request', systemAction: 'Validates request; routes through review/payout states', outcome: 'Payout completed, rejected, or reversed', dataRequired: 'withdrawal_id, user_id, amount, method, status, lifecycle timestamps', event: 'withdrawal_requested / processing / completed / rejected / reversed', source: 'Backend / Payout Service', question: 'What are withdrawal completion rate, rejection reasons, and processing times?', status: 'Proposed', priority: 'Critical' },
+        { area: 'Referrals', userAction: 'Shares invite; friend signs up & uses app', systemAction: 'Links referrer/referee; checks activation & conversion rules', outcome: 'Referral created, registered, activated, converted', dataRequired: 'referral_id, referrer_id, referee_id, stage timestamps, status', event: 'referral_created / registered / activated / converted', source: 'Backend / Growth Service', question: 'How many referred sign-ups become active, rewarding users?', status: 'Proposed', priority: 'High' },
+        { area: 'Engagement', userAction: 'Claims daily reward, spins, or updates streak', systemAction: 'Updates streak/spin/mission/badge state', outcome: 'Repeat engagement & milestone progression', dataRequired: 'user_id, event_id, feature name, streak/level/spin fields, ts', event: 'daily_reward_claimed / streak_updated / spin_completed / mission_completed', source: 'Frontend / Backend', question: 'Which features drive daily habits and repeat visits?', status: 'Proposed', priority: 'Medium' }
+      ];
+
+      const A4_GAPS_DATA = [
+        { id: 'GAP-01', title: 'Unverified Event Instrumentation', priority: 'Critical', detail: 'Live emission, naming consistency, and payload completeness across frontend/backend events are not yet verified.' },
+        { id: 'GAP-02', title: 'Task Completion vs. Reward Credit Conflation', priority: 'Critical', detail: 'Treating task completion as equivalent to credited rewards obscures validation holds, pending states, and reversals.' },
+        { id: 'GAP-03', title: 'Missing Standardized Failure Taxonomy', priority: 'High', detail: 'Abandoned flows, validation failures, tracking misses, and system errors require structured categories.' },
+        { id: 'GAP-04', title: 'Third-Party Ad, Offer & Survey Lag', priority: 'High', detail: 'External networks and postbacks can delay or drop attribution signals outside VELOOP’s direct control.' },
+        { id: 'GAP-05', title: 'Wallet Reversal & Correction Lineage', priority: 'Critical', detail: 'Reversals and adjustments need explicit transaction IDs and parent/reference links to prevent double-counting.' },
+        { id: 'GAP-06', title: 'Withdrawal Stage Timestamps & Reasons', priority: 'High', detail: 'Requested, processing, and final timestamps plus standardized reason categories are needed for SLA and drop-off analysis.' },
+        { id: 'GAP-07', title: 'Referral Funnel Stage Separation', priority: 'High', detail: 'Tracking only referral creation or sign-up misses activation and conversion drop-offs.' },
+        { id: 'GAP-08', title: 'Session & Identity Stitching Gaps', priority: 'Medium', detail: 'Missing session identifiers or inconsistent user keys across tables can break funnels and joins.' },
+        { id: 'GAP-09', title: 'Timestamp Format & Timezone Consistency', priority: 'High', detail: 'Mixed formats or ambiguous timezones across client, server, and partners distort daily metrics and event ordering.' },
+        { id: 'GAP-10', title: 'Messy & Unvalidated Input Records', priority: 'High', detail: 'Duplicates, orphan IDs, casing/whitespace variations, and invalid transitions can skew metrics without early checks.' },
+        { id: 'GAP-11', title: 'PII & Governance Boundaries', priority: 'Medium', detail: 'Unnecessary personal data must be avoided and access to sensitive fields/credentials strictly restricted.' }
+      ];
+
+      const WPB_IDS = [
+        { id: 'user_id', role: 'Stable User Identifier', why: 'Links a user across sessions, devices, tasks, rewards, wallet entries, and withdrawals for cohorts and retention.' },
+        { id: 'event_id', role: 'Event Identifier', why: 'Uniquely identifies each recorded event instance to deduplicate retries and audit event streams.' },
+        { id: 'session_id', role: 'Session Identifier', why: 'Groups actions within an active session window to support session funnels and drop-off analysis (Proposed).' },
+        { id: 'transaction_id', role: 'Transaction Identifier', why: 'Uniquely keys ledger/financial transactions to prevent double-counting and link reversals or adjustments.' }
+      ];
+
+      const WPB_FIELDS = [
+        { field: 'user_id', type: 'String / UUID', required: 'Yes', purpose: 'Primary user key across tables and events', source: 'Auth / Backend', status: 'Proposed' },
+        { field: 'registered_at', type: 'Timestamp', required: 'Yes', purpose: 'Tracks new user sign-ups and cohort dates', source: 'Auth / Backend', status: 'Proposed' },
+        { field: 'registration_source', type: 'String', required: 'Yes', purpose: 'Measures acquisition channel performance', source: 'Client / Attribution', status: 'Proposed' },
+        { field: 'device_platform', type: 'String', required: 'Yes', purpose: 'Segments behavior by OS, app, or web platform', source: 'Client / Session', status: 'Proposed' },
+        { field: 'last_login_at', type: 'Timestamp', required: 'No', purpose: 'Tracks login recency and session starts', source: 'Auth / Backend', status: 'Proposed' },
+        { field: 'onboarding_started_at', type: 'Timestamp', required: 'No', purpose: 'Measures onboarding entry and initial drop-off', source: 'App / Backend', status: 'Proposed' },
+        { field: 'onboarding_completed_at', type: 'Timestamp', required: 'No', purpose: 'Tracks onboarding completion rate and duration', source: 'App / Backend', status: 'Proposed' },
+        { field: 'account_status', type: 'String', required: 'Yes', purpose: 'Captures current account state (e.g., active, suspended, closed)', source: 'Account Service', status: 'Proposed' },
+        { field: 'status_updated_at', type: 'Timestamp', required: 'No', purpose: 'Records when account status last changed', source: 'Account Service', status: 'Proposed' },
+        { field: 'last_active_at', type: 'Timestamp', required: 'No', purpose: 'Identifies active vs. inactive or dormant users', source: 'Activity / Backend', status: 'Proposed' }
+      ];
+
+      const WPC_LIFECYCLE = [
+        { stage: '1. Discovery', desc: 'User sees or browses an available task, offer, mission, spin, or daily reward.' },
+        { stage: '2. Start', desc: 'User initiates the earning activity; start_time is recorded.' },
+        { stage: '3. Completion', desc: 'User finishes required steps; completion_time is recorded.' },
+        { stage: '4. Validation', desc: 'System or partner evaluates completion rules; validation_status is set.' },
+        { stage: '5. Reward', desc: 'Reward transitions to pending, credited, reversed, or corrected.' }
+      ];
+
+      const WPC_TASK_FIELDS = ['task_id', 'task_type', 'feature', 'user_id', 'start_time', 'completion_time', 'status', 'reward_amount', 'reward_unit', 'validation_status', 'source_info'];
+
+      const WPC_REWARD_STATES = [
+        { state: 'reward_credited', desc: 'Reward is approved and credited to the user’s balance.' },
+        { state: 'reward_pending', desc: 'Activity occurred, but reward credit is awaiting validation or partner confirmation.' },
+        { state: 'reward_reversed', desc: 'Previously credited or pending reward is clawed back/reversed.' },
+        { state: 'reward_corrected', desc: 'Reward amount or unit is adjusted via a documented correction entry.' }
+      ];
+
+      const WPC_FAILURE_CLASSES = [
+        { code: 'abandoned', desc: 'User exited or did not finish required steps before completion.' },
+        { code: 'validation_failed', desc: 'Activity did not pass eligibility, rule, or completion validation.' },
+        { code: 'tracking_failed', desc: 'Expected completion or external postback tracking signal was missed or incomplete.' },
+        { code: 'system_error', desc: 'Application, API, or backend error interrupted the task lifecycle.' }
+      ];
+
+      const WPD_WALLET_FIELDS = [
+        { field: 'transaction_id', note: 'Unique ledger transaction identifier (prevents duplicate counting)' },
+        { field: 'user_id', note: 'Account owner identifier' },
+        { field: 'timestamp', note: 'Ledger posting timestamp' },
+        { field: 'transaction_type', note: 'reward_credit, redemption, reversal, adjustment (Proposed where unconfirmed)' },
+        { field: 'amount & unit', note: 'Transaction value and unit (e.g., VES, XP, Gems, Tokens)' },
+        { field: 'status', note: 'Current ledger transaction status (e.g., pending, completed, reversed)' },
+        { field: 'source', note: 'Originating feature, task, or system module' },
+        { field: 'reference_id', note: 'Links to related task, reward, redemption, or withdrawal ID' },
+        { field: 'original_transaction_id', note: 'Links reversal or correction back to original entry (Proposed)' }
+      ];
+
+      const WPD_WITHDRAWAL_FIELDS = [
+        { field: 'withdrawal_id', note: 'Unique withdrawal request identifier' },
+        { field: 'user_id', note: 'Requesting user identifier' },
+        { field: 'requested_amount', note: 'Amount requested for payout' },
+        { field: 'method', note: 'Selected payout channel/method' },
+        { field: 'requested_timestamp', note: 'When withdrawal request was submitted' },
+        { field: 'processing_timestamp', note: 'When review/payout processing began' },
+        { field: 'final_timestamp', note: 'When terminal state (completed/rejected/reversed) occurred' },
+        { field: 'status & reason_category', note: 'requested, processing, completed, rejected, reversed + reason category' }
+      ];
+
+      const WPD_KPIS = [
+        { name: 'Withdrawal Requests', def: 'Total withdrawal requests submitted in period.', formula: 'COUNT(DISTINCT withdrawal_id)', source: 'Withdrawals / Payout Service', stakeholder: 'Operations & Finance', limitation: 'Subject to duplicate/invalid request filtering.' },
+        { name: 'Completed Withdrawals', def: 'Withdrawals reaching completed payout status.', formula: 'COUNT(DISTINCT withdrawal_id WHERE status = "completed")', source: 'Withdrawals / Payout Service', stakeholder: 'Finance & Product', limitation: 'Depends on accurate final settlement status.' },
+        { name: 'Pending Withdrawals', def: 'Open requests still in requested or processing state.', formula: 'COUNT(DISTINCT withdrawal_id WHERE status IN ("requested","processing"))', source: 'Withdrawals / Payout Service', stakeholder: 'Operations', limitation: 'Point-in-time snapshot sensitive to refresh lag.' },
+        { name: 'Rejected / Reversed Withdrawals', def: 'Withdrawals rejected prior to payout or reversed after processing.', formula: 'COUNT(withdrawal_id WHERE status IN ("rejected","reversed"))', source: 'Withdrawals & Wallet Ledger', stakeholder: 'Operations & Risk', limitation: 'Requires standardized reason_category values.' },
+        { name: 'Processing Time', def: 'Duration from request/processing to final resolution.', formula: 'MEDIAN / AVG(final_timestamp - requested_timestamp)', source: 'Withdrawals Lifecycle', stakeholder: 'Operations & Engineering', limitation: 'Requires reliable timestamps across all stages.' },
+        { name: 'Completion Rate', def: 'Share of withdrawal requests completed.', formula: 'Completed Withdrawals / Total Withdrawal Requests', source: 'Withdrawals Lifecycle', stakeholder: 'Product & Finance', limitation: 'In-flight pending items can temporarily lower rate.' },
+        { name: 'Pending Queue', def: 'Unsettled requests and waiting backlog in the queue.', formula: 'Open pending count & age distribution', source: 'Withdrawals Lifecycle', stakeholder: 'Operations', limitation: 'Requires consistent status transitions.' },
+        { name: 'Withdrawal Volume & Method Mix', def: 'Total requested/completed value and share by method.', formula: 'SUM(requested_amount) & share grouped by method', source: 'Withdrawals & Wallet', stakeholder: 'Finance & Product', limitation: 'Must segment by unit/currency and payout method.' }
+      ];
+
+      const WPE_FUNNEL = [
+        { stage: '1. Referral Created', desc: 'Invite link or referral code is generated/shared (creation_timestamp).' },
+        { stage: '2. User Registered', desc: 'Referred user creates a VELOOP account (registration_timestamp).' },
+        { stage: '3. User Activated', desc: 'Referred user completes initial qualifying activity (activation_timestamp).' },
+        { stage: '4. Referral Converted', desc: 'Referral meets full conversion rules and reward criteria.' }
+      ];
+
+      const WPE_REFERRAL_FIELDS = ['referral_id', 'referring_user_id', 'referred_user_id', 'creation_timestamp', 'registration_timestamp', 'activation_timestamp', 'conversion_timestamp', 'status', 'source'];
+
+      const WPE_ENGAGEMENT = [
+        { metric: 'Active & Returning Users', desc: 'Measures unique users with qualifying activity over a period and users returning across intervals.' },
+        { metric: 'Feature Adoption', desc: 'Tracks the share of active or registered users trying a specific feature (such as spins, streaks, or missions) for the first time.' },
+        { metric: 'Repeat Usage & Feature Frequency', desc: 'Captures how frequently users engage with a feature or return to the platform within a defined timeframe.' },
+        { metric: 'Task Activity & Daily Activity', desc: 'Monitors task starts, completions, and daily active engagement across earning and retention features.' }
+      ];
+
+      const WORK_PACKAGES_DATA = [
+        { code: 'WP A', days: 'Days 1–4', title: 'Product Data Readiness Audit', sheetState: 'In Sheet', evidence: 'Proposed', summary: 'Maps product areas/features (A1), distinguishes user/system/business events (A2–A3), and builds the Data Coverage Matrix + 11 analytics gaps (A4).' },
+        { code: 'WP B', days: 'Days 5–6', title: 'User & Account Analytics Specification', sheetState: 'In Sheet', evidence: 'Proposed', summary: 'Defines user_id, event_id, session_id, and transaction_id (B1) plus registration, login, onboarding, and account lifecycle fields (B2).' },
+        { code: 'WP C', days: 'Days 7–8', title: 'Earning & Reward Analytics', sheetState: 'In Sheet', evidence: 'Proposed', summary: 'Models Discovery → Start → Completion → Validation → Reward, task fields, proposed failure categories, reward states, and third-party dependencies.' },
+        { code: 'WP D', days: 'Days 9–10', title: 'Wallet & Withdrawal Analytics', sheetState: 'In Sheet', evidence: 'Proposed', summary: 'Designs the 9-field wallet transaction ledger, withdrawal lifecycle (requested/processing/completed/rejected/reversed), and 8 withdrawal KPIs.' },
+        { code: 'WP E', days: 'Day 11', title: 'Referral & Engagement Analytics', sheetState: 'In Sheet', evidence: 'Proposed', summary: 'Separates Referral Created → Registered → Activated → Converted and defines engagement metrics.' },
+        { code: 'WP F', days: 'Days 12–14', title: 'Production Event Tracking Plan', sheetState: 'In Sheet', evidence: 'Proposed', summary: 'Standardizes event naming and defines 30 events across account, tasks, rewards, engagement, referrals, wallet, and withdrawals.' },
+        { code: 'WP G', days: 'Days 15–16', title: 'VELOOP Data Dictionary', sheetState: 'In Sheet', evidence: 'Proposed', summary: 'Documents 78 governed fields across 8 core entities with data types, definitions, examples, allowed values, validation, sensitivity, and analytical use.' },
+        { code: 'WP H', days: 'Days 17–18', title: 'Logical Data Model', sheetState: 'In Sheet', evidence: 'Proposed', summary: 'Defines primary/foreign keys, business grain, relationship cardinalities, and an engineer-ready ER blueprint.' },
+        { code: 'WP I', days: 'Day 19', title: 'KPI Catalogue', sheetState: 'Upcoming', evidence: 'Proposed', summary: 'Defines 30+ KPIs across users, engagement, rewards, wallet, withdrawals, referrals, and support/content with formulas and limitations.' },
+        { code: 'WP J', days: 'Day 20', title: 'Simulated Data Profiling', sheetState: 'Upcoming', evidence: 'To Be Verified', summary: 'Profiles simulated sheets, tests user_id joins, and checks KPI calculability.' },
+        { code: 'WP K', days: 'Day 21', title: 'Data Quality Audit', sheetState: 'Upcoming', evidence: 'To Be Verified', summary: 'Audits Messy_Data and other sheets for duplicate/missing IDs, timestamps, statuses, casing/spaces, numbers, orphans, and transitions.' },
+        { code: 'WP L', days: 'Days 22–24', title: 'Data Quality Control Framework', sheetState: 'Upcoming', evidence: 'Proposed', summary: 'Assigns preventive and detective quality rules across application, collection, raw storage, transformation, analytics, and dashboard layers.' },
+        { code: 'WP M', days: 'Day 22', title: 'Analytics Dashboard Blueprint', sheetState: 'Upcoming', evidence: 'Proposed', summary: 'Specifies 7 dashboards (Executive, User, Engagement, Rewards, Wallet, Withdrawals, Referrals).' },
+        { code: 'WP N', days: 'Day 23', title: 'Developer Analytics Handoff', sheetState: 'Upcoming', evidence: 'Proposed', summary: 'Provides engineering specifications for critical events including triggers, payloads, validation, deduplication, and acceptance tests.' },
+        { code: 'WP O', days: 'Day 24', title: 'Data Pipeline & Operating Model', sheetState: 'Upcoming', evidence: 'Proposed', summary: 'Designs a practical, scalable pipeline from app events to raw storage, validation, transformation, analytics layer, and BI.' },
+        { code: 'WP P', days: 'Day 24', title: 'Data Access, Privacy & Governance', sheetState: 'Upcoming', evidence: 'Proposed', summary: 'Defines role-based access and blocks exposure of passwords, secrets, API keys, payment credentials, and excess PII.' },
+        { code: 'WP Q', days: 'Day 24', title: 'Analytics Change Management', sheetState: 'Upcoming', evidence: 'Proposed', summary: 'Establishes a Metric/Event Change Log with versioning and impact tracking.' },
+        { code: 'WP R', days: 'Day 24', title: 'Analytics Gap Assessment', sheetState: 'Upcoming', evidence: 'To Be Verified', summary: 'Evaluates readiness gaps across event coverage, model, dictionary, KPIs, quality, dashboards, instrumentation, access, and docs.' },
+        { code: 'WP S & Backlog', days: 'Days 24–25', title: 'Assumption Register & Final Implementation Backlog', sheetState: 'Upcoming', evidence: 'To Be Verified', summary: 'Records unknowns/assumptions (WP S) and produces the prioritized implementation backlog (Critical / High / Medium).' }
+      ];
+
+      const DELIVERABLES_DATA = [
+        { num: '01', name: 'Executive Summary', scope: 'Summary of investigation, findings, unknowns, recommendations, risks & priorities.', wp: 'All WPs', status: 'Planned' },
+        { num: '02', name: 'Product Data Audit', scope: 'Maps product areas, user actions, system outcomes & event distinctions.', wp: 'WP A (A1–A3)', status: 'In Sheet' },
+        { num: '03', name: 'Data Coverage Matrix', scope: 'Maps actions, outcomes, required data, proposed events, sources & 11 gaps.', wp: 'WP A (A4)', status: 'In Sheet' },
+        { num: '04', name: 'User Analytics Specification', scope: 'Covers identifiers and registration, login, onboarding & lifecycle fields.', wp: 'WP B', status: 'In Sheet' },
+        { num: '05', name: 'Earning & Reward Analytics Specification', scope: 'Covers earning stages, task fields, proposed failures, reward states & 3rd-party risks.', wp: 'WP C', status: 'In Sheet' },
+        { num: '06', name: 'Wallet & Withdrawal Analytics Specification', scope: 'Covers wallet transaction ledger, withdrawal lifecycle & withdrawal KPIs.', wp: 'WP D', status: 'In Sheet' },
+        { num: '07', name: 'Referral & Engagement Analytics', scope: '4-stage referral funnel & engagement measurement framework.', wp: 'WP E', status: 'In Sheet' },
+        { num: '08', name: 'Event Tracking Plan', scope: 'Naming convention and 30 standardized events across product areas.', wp: 'WP F', status: 'In Sheet' },
+        { num: '09', name: 'Data Dictionary', scope: '78 governed fields across 8 entities with full metadata.', wp: 'WP G', status: 'In Sheet' },
+        { num: '10', name: 'Logical Data Model', scope: 'Primary/foreign keys, relationships, grain & ER blueprint.', wp: 'WP H', status: 'In Sheet' },
+        { num: '11', name: 'KPI Catalogue', scope: '30+ reproducible KPIs with formulas and limitations.', wp: 'WP I', status: 'Planned' },
+        { num: '12', name: 'Simulated Data Profiling', scope: 'Profiles simulated sheets, user_id joins & KPI calculability.', wp: 'WP J', status: 'Planned' },
+        { num: '13', name: 'Data Quality Audit', scope: 'Documents issues in Messy_Data and other sheets with fixes & prevention.', wp: 'WP K & WP L', status: 'Planned' },
+        { num: '14', name: 'Dashboard Blueprint', scope: 'Specifications across 7 dashboard views.', wp: 'WP M', status: 'Planned' },
+        { num: '15', name: 'Developer Analytics Handoff', scope: 'Engineering specifications for critical events with acceptance tests.', wp: 'WP N', status: 'Planned' },
+        { num: '16', name: 'Data Pipeline Proposal', scope: 'Architecture for scalable ingestion, validation & transformation.', wp: 'WP O', status: 'Planned' },
+        { num: '17', name: 'Privacy & Governance Proposal', scope: 'Role-based access, PII minimization, secret exclusion & change log.', wp: 'WP P & WP Q', status: 'Planned' },
+        { num: '18', name: 'Analytics Readiness Assessment', scope: 'Scorecard and evidence across readiness dimensions.', wp: 'WP R', status: 'Planned' },
+        { num: '19', name: 'Assumption & Verification Register', scope: 'Tracks unknowns, sources, risk, verification owners & status.', wp: 'WP S', status: 'Planned' },
+        { num: '20', name: 'Implementation Backlog', scope: 'Prioritized development/data backlog with dependencies & stages.', wp: 'Backlog', status: 'Planned' },
+        { num: '21', name: 'Final Consolidated Report', scope: 'Complete conclusions, authenticity safeguards & links to deliverables.', wp: 'All WPs', status: 'Planned' }
+      ];
+
+      function escapeHtml(str) {
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      }
+
+      function createProposedBadge(labelText) {
+        const text = labelText || 'Proposed';
+        const cls = text === 'To Be Verified' ? 'bg-sky-100 text-sky-900 border-sky-200' : 'bg-amber-100 text-amber-900 border-amber-200';
+        return `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold border ${cls}">${escapeHtml(text)}</span>`;
+      }
+
+      function createSheetStateBadge(state) {
+        const cls = state === 'In Sheet' ? 'bg-emerald-100 text-emerald-800 border-emerald-200' : 'bg-slate-100 text-slate-700 border-slate-200';
+        return `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold border ${cls}">${escapeHtml(state)}</span>`;
+      }
+
+      function createPriorityBadge(priority) {
+        const map = { Critical: 'bg-rose-100 text-rose-800 border-rose-200', High: 'bg-amber-100 text-amber-900 border-amber-200', Medium: 'bg-sky-100 text-sky-800 border-sky-200' };
+        return `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold border ${map[priority] || 'bg-slate-100 text-slate-700 border-slate-200'}">${escapeHtml(priority)}</span>`;
+      }
+
+      function renderA1Table() {
+        const tbody = document.getElementById('a1-table-body');
+        const countLabel = document.getElementById('a1-count-label');
+        const searchVal = (document.getElementById('a1-search').value || '').trim().toLowerCase();
+        const areaVal = document.getElementById('a1-area-filter').value;
+        const statusVal = document.getElementById('a1-status-filter').value;
+
+        const filtered = A1_DATA.filter((row) => {
+          const matchesArea = areaVal === 'ALL' || row.area === areaVal;
+          const matchesStatus = statusVal === 'ALL' || row.status === statusVal;
+          const matchesSearch = !searchVal || Object.values(row).some((v) => String(v).toLowerCase().includes(searchVal));
+          return matchesArea && matchesStatus && matchesSearch;
+        });
+
+        countLabel.textContent = `Showing ${filtered.length} of ${A1_DATA.length} rows`;
+        tbody.innerHTML = filtered.length
+          ? filtered.map((row) => `
+              <tr class="hover:bg-slate-50/80 transition-colors align-top">
+                <td class="px-4 py-3.5 font-semibold text-slate-900 whitespace-nowrap">${escapeHtml(row.area)}</td>
+                <td class="px-4 py-3.5 font-medium text-indigo-700">${escapeHtml(row.feature)}</td>
+                <td class="px-4 py-3.5 text-slate-700">${escapeHtml(row.userAction)}</td>
+                <td class="px-4 py-3.5 text-slate-700">${escapeHtml(row.systemOutcome)}</td>
+                <td class="px-4 py-3.5 text-xs text-slate-700 font-mono">${escapeHtml(row.dataRequired)}</td>
+                <td class="px-4 py-3.5 text-slate-700">${escapeHtml(row.question)}</td>
+                <td class="px-4 py-3.5 whitespace-nowrap">${createProposedBadge()}</td>
+              </tr>`).join('')
+          : `<tr><td colspan="7" class="px-4 py-8 text-center text-slate-500 text-sm">No matching rows found.</td></tr>`;
+      }
+
+      function renderA2A3() {
+        document.getElementById('a2a3-cards').innerHTML = A2_A3_DATA.map((item) => `
+          <div class="rounded-2xl border border-slate-200 bg-slate-50/60 p-5 flex flex-col justify-between space-y-4">
+            <div class="space-y-2.5">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold border ${item.badgeClass}">${escapeHtml(item.badge)}</span>
+              <h3 class="text-base sm:text-lg font-bold text-slate-900">${escapeHtml(item.title)}</h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">${escapeHtml(item.definition)}</p>
+            </div>
+            <div class="pt-2 border-t border-slate-200/80">
+              <div class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Examples</div>
+              <ul class="space-y-1.5 text-xs sm:text-sm text-slate-700">
+                ${item.examples.map((ex) => `<li class="flex items-start gap-2"><span class="text-indigo-600 font-bold">&bull;</span><span>${escapeHtml(ex)}</span></li>`).join('')}
+              </ul>
+            </div>
+          </div>`).join('');
+      }
+
+      function renderA4() {
+        const priorityVal = document.getElementById('a4-priority-filter').value;
+        const filtered = A4_MATRIX_DATA.filter((row) => priorityVal === 'ALL' || row.priority === priorityVal);
+        document.getElementById('a4-table-body').innerHTML = filtered.map((row) => `
+          <tr class="hover:bg-slate-50/80 transition-colors align-top">
+            <td class="px-4 py-3 font-semibold text-slate-900 whitespace-nowrap">${escapeHtml(row.area)}</td>
+            <td class="px-4 py-3 text-slate-700">${escapeHtml(row.userAction)}</td>
+            <td class="px-4 py-3 text-slate-700">${escapeHtml(row.systemAction)}</td>
+            <td class="px-4 py-3 text-slate-700">${escapeHtml(row.outcome)}</td>
+            <td class="px-4 py-3 text-xs font-mono text-slate-700">${escapeHtml(row.dataRequired)}</td>
+            <td class="px-4 py-3 text-xs font-mono text-indigo-700">${escapeHtml(row.event)}</td>
+            <td class="px-4 py-3 text-slate-700 whitespace-nowrap">${escapeHtml(row.source)}</td>
+            <td class="px-4 py-3 text-slate-700">${escapeHtml(row.question)}</td>
+            <td class="px-4 py-3 whitespace-nowrap">${createProposedBadge()}</td>
+            <td class="px-4 py-3 whitespace-nowrap">${createPriorityBadge(row.priority)}</td>
+          </tr>`).join('');
+
+        document.getElementById('a4-gaps-grid').innerHTML = A4_GAPS_DATA.map((gap) => `
+          <div class="rounded-xl border border-slate-200 bg-slate-50/60 p-4 space-y-1.5">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-xs font-bold font-mono text-indigo-700">${escapeHtml(gap.id)}</span>
+              ${createPriorityBadge(gap.priority)}
+            </div>
+            <div class="text-sm font-bold text-slate-900">${escapeHtml(gap.title)}</div>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">${escapeHtml(gap.detail)}</p>
+          </div>`).join('');
+      }
+
+      function renderWPB() {
+        document.getElementById('wpb-ids-grid').innerHTML = WPB_IDS.map((item) => `
+          <div class="rounded-2xl border border-slate-200 bg-slate-50/70 p-4 space-y-2">
+            <div class="text-sm font-bold font-mono text-indigo-700">${escapeHtml(item.id)}</div>
+            <div class="text-xs font-semibold text-slate-900">${escapeHtml(item.role)}</div>
+            <p class="text-xs text-slate-600 leading-relaxed">${escapeHtml(item.why)}</p>
+          </div>`).join('');
+
+        document.getElementById('wpb-table-body').innerHTML = WPB_FIELDS.map((f) => `
+          <tr class="hover:bg-slate-50/80 transition-colors">
+            <td class="px-4 py-3 font-mono font-semibold text-slate-900 whitespace-nowrap">${escapeHtml(f.field)}</td>
+            <td class="px-4 py-3 text-slate-700 whitespace-nowrap">${escapeHtml(f.type)}</td>
+            <td class="px-4 py-3 whitespace-nowrap"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${f.required === 'Yes' ? 'bg-indigo-100 text-indigo-800' : 'bg-slate-100 text-slate-600'}">${escapeHtml(f.required)}</span></td>
+            <td class="px-4 py-3 text-slate-700">${escapeHtml(f.purpose)}</td>
+            <td class="px-4 py-3 text-slate-700 whitespace-nowrap">${escapeHtml(f.source)}</td>
+            <td class="px-4 py-3 whitespace-nowrap">${createProposedBadge()}</td>
+          </tr>`).join('');
+      }
+
+      function renderWPC() {
+        document.getElementById('wpc-lifecycle-grid').innerHTML = WPC_LIFECYCLE.map((s) => `
+          <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-4 space-y-1.5">
+            <div class="text-sm font-bold text-indigo-700">${escapeHtml(s.stage)}</div>
+            <p class="text-xs text-slate-600 leading-relaxed">${escapeHtml(s.desc)}</p>
+          </div>`).join('');
+
+        document.getElementById('wpc-task-fields').innerHTML = WPC_TASK_FIELDS.map((tf) => `<span class="px-3 py-1.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-mono font-semibold text-slate-800">${escapeHtml(tf)}</span>`).join('');
+        document.getElementById('wpc-reward-states').innerHTML = WPC_REWARD_STATES.map((rs) => `
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+            <code class="text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-lg w-fit">${escapeHtml(rs.state)}</code>
+            <span class="text-xs text-slate-600 sm:text-right">${escapeHtml(rs.desc)}</span>
+          </div>`).join('');
+        document.getElementById('wpc-failure-classes').innerHTML = WPC_FAILURE_CLASSES.map((fc) => `
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+            <div class="flex items-center justify-between gap-2">
+              <code class="text-xs font-bold text-rose-800">${escapeHtml(fc.code)}</code>
+              ${createProposedBadge()}
+            </div>
+            <p class="text-xs text-slate-600 mt-1">${escapeHtml(fc.desc)}</p>
+          </div>`).join('');
+      }
+
+      function renderWPD() {
+        document.getElementById('wpd-wallet-body').innerHTML = WPD_WALLET_FIELDS.map((item) => `<tr><td class="px-3 py-2.5 font-mono font-semibold text-slate-900 whitespace-nowrap">${escapeHtml(item.field)}</td><td class="px-3 py-2.5 text-slate-600">${escapeHtml(item.note)}</td></tr>`).join('');
+        document.getElementById('wpd-withdrawal-body').innerHTML = WPD_WITHDRAWAL_FIELDS.map((item) => `<tr><td class="px-3 py-2.5 font-mono font-semibold text-slate-900 whitespace-nowrap">${escapeHtml(item.field)}</td><td class="px-3 py-2.5 text-slate-600">${escapeHtml(item.note)}</td></tr>`).join('');
+        document.getElementById('wpd-kpis-body').innerHTML = WPD_KPIS.map((k) => `
+          <tr class="hover:bg-slate-50/80 transition-colors align-top">
+            <td class="px-4 py-3 font-semibold text-slate-900 whitespace-nowrap">${escapeHtml(k.name)}</td>
+            <td class="px-4 py-3 text-slate-700">${escapeHtml(k.def)}</td>
+            <td class="px-4 py-3 text-xs font-mono text-indigo-700">${escapeHtml(k.formula)}</td>
+            <td class="px-4 py-3 text-slate-700 whitespace-nowrap">${escapeHtml(k.source)}</td>
+            <td class="px-4 py-3 text-slate-700 whitespace-nowrap">${escapeHtml(k.stakeholder)}</td>
+            <td class="px-4 py-3 text-slate-600">${escapeHtml(k.limitation)}</td>
+          </tr>`).join('');
+      }
+
+      function renderWPE() {
+        document.getElementById('wpe-funnel-grid').innerHTML = WPE_FUNNEL.map((f) => `
+          <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-4 space-y-1.5">
+            <div class="text-sm font-bold text-indigo-700">${escapeHtml(f.stage)}</div>
+            <p class="text-xs text-slate-600 leading-relaxed">${escapeHtml(f.desc)}</p>
+          </div>`).join('');
+        document.getElementById('wpe-referral-fields').innerHTML = WPE_REFERRAL_FIELDS.map((rf) => `<span class="px-3 py-1.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-mono font-semibold text-slate-800">${escapeHtml(rf)}</span>`).join('');
+        document.getElementById('wpe-engagement-grid').innerHTML = WPE_ENGAGEMENT.map((e) => `
+          <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-4 space-y-1.5">
+            <div class="text-sm font-bold text-slate-900">${escapeHtml(e.metric)}</div>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">${escapeHtml(e.desc)}</p>
+          </div>`).join('');
+      }
+
+      function renderRoadmap() {
+        const wpSearch = (document.getElementById('wp-search').value || '').trim().toLowerCase();
+        const wpPhase = document.getElementById('wp-phase-filter').value;
+        const wpEvidence = document.getElementById('wp-evidence-filter').value;
+
+        const filteredWPs = WORK_PACKAGES_DATA.filter((wp) => {
+          const matchesPhase = wpPhase === 'ALL' || wp.sheetState === wpPhase;
+          const matchesEvidence = wpEvidence === 'ALL' || wp.evidence === wpEvidence;
+          const matchesSearch = !wpSearch || Object.values(wp).some((v) => String(v).toLowerCase().includes(wpSearch));
+          return matchesPhase && matchesEvidence && matchesSearch;
+        });
+
+        document.getElementById('wp-count-label').textContent = `Showing ${filteredWPs.length} of ${WORK_PACKAGES_DATA.length} work packages`;
+        document.getElementById('wp-roadmap-grid').innerHTML = filteredWPs.length
+          ? filteredWPs.map((wp) => `
+              <div class="rounded-2xl border border-slate-200 bg-slate-50/60 p-4 flex flex-col justify-between space-y-3">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between gap-2 flex-wrap">
+                    <span class="text-xs font-extrabold font-mono text-indigo-700">${escapeHtml(wp.code)} &bull; ${escapeHtml(wp.days)}</span>
+                    <div class="flex items-center gap-1.5">
+                      ${createSheetStateBadge(wp.sheetState)}
+                      ${createProposedBadge(wp.evidence)}
+                    </div>
+                  </div>
+                  <h4 class="text-sm font-bold text-slate-900">${escapeHtml(wp.title)}</h4>
+                  <p class="text-xs text-slate-600 leading-relaxed">${escapeHtml(wp.summary)}</p>
+                </div>
+              </div>`).join('')
+          : `<div class="col-span-full p-8 text-center text-slate-500 text-sm rounded-xl border border-slate-200 bg-slate-50">No work packages match your filter.</div>`;
+
+        const delivSearch = (document.getElementById('deliv-search').value || '').trim().toLowerCase();
+        const filteredDelivs = DELIVERABLES_DATA.filter((d) => !delivSearch || Object.values(d).some((v) => String(v).toLowerCase().includes(delivSearch)));
+
+        document.getElementById('deliv-table-body').innerHTML = filteredDelivs.length
+          ? filteredDelivs.map((d) => {
+              const badgeCls = d.status === 'In Sheet' ? 'bg-emerald-100 text-emerald-800 border-emerald-200' : 'bg-slate-100 text-slate-700 border-slate-200';
+              return `
+                <tr class="hover:bg-slate-50/80 transition-colors align-top">
+                  <td class="px-4 py-3 font-mono font-bold text-indigo-700 whitespace-nowrap">${escapeHtml(d.num)}</td>
+                  <td class="px-4 py-3 font-semibold text-slate-900 whitespace-nowrap">${escapeHtml(d.name)}</td>
+                  <td class="px-4 py-3 text-slate-700">${escapeHtml(d.scope)}</td>
+                  <td class="px-4 py-3 font-mono text-xs text-slate-700 whitespace-nowrap">${escapeHtml(d.wp)}</td>
+                  <td class="px-4 py-3 whitespace-nowrap"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold border ${badgeCls}">${escapeHtml(d.status)}</span></td>
+                </tr>`;
+            }).join('')
+          : `<tr><td colspan="5" class="px-4 py-8 text-center text-slate-500 text-sm">No deliverables match "${escapeHtml(delivSearch)}".</td></tr>`;
+      }
+
+      function setActiveTab(tabKey) {
+        const tabs = document.querySelectorAll('.nav-tab');
+        const panels = document.querySelectorAll('.tab-panel');
+        let matched = false;
+
+        tabs.forEach((btn) => {
+          const isTarget = btn.getAttribute('data-tab') === tabKey;
+          if (isTarget) matched = true;
+          btn.setAttribute('aria-selected', isTarget ? 'true' : 'false');
+          btn.className = isTarget
+            ? 'nav-tab whitespace-nowrap px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer bg-indigo-600 text-white shadow-xs'
+            : 'nav-tab whitespace-nowrap px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer text-slate-600 hover:text-slate-900 hover:bg-slate-100';
+        });
+
+        if (!matched) {
+          setActiveTab('overview');
+          return;
+        }
+
+        panels.forEach((panel) => panel.classList.toggle('hidden', panel.id !== `panel-${tabKey}`));
+      }
+
+      function initApp() {
+        try {
+          renderA1Table();
+          renderA2A3();
+          renderA4();
+          renderWPB();
+          renderWPC();
+          renderWPD();
+          renderWPE();
+          renderRoadmap();
+
+          document.querySelectorAll('.nav-tab').forEach((btn) => btn.addEventListener('click', () => setActiveTab(btn.getAttribute('data-tab'))));
+          document.getElementById('a1-search').addEventListener('input', renderA1Table);
+          document.getElementById('a1-area-filter').addEventListener('change', renderA1Table);
+          document.getElementById('a1-status-filter').addEventListener('change', renderA1Table);
+          document.getElementById('a4-priority-filter').addEventListener('change', renderA4);
+          document.getElementById('wp-search').addEventListener('input', renderRoadmap);
+          document.getElementById('wp-phase-filter').addEventListener('change', renderRoadmap);
+          document.getElementById('wp-evidence-filter').addEventListener('change', renderRoadmap);
+          document.getElementById('deliv-search').addEventListener('input', renderRoadmap);
+
+          setActiveTab('overview');
+        } catch (err) {
+          const feedback = document.getElementById('app-feedback');
+          feedback.textContent = `Unable to initialize blueprint view: ${err.message}`;
+          feedback.classList.remove('hidden');
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initApp);
+      } else {
+        initApp();
+      }
+    })();
+  </script>
+</body>
+</html>
